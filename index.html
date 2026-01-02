@@ -1,21 +1,214 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <title>الموقع مغلق</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Tahoma, sans-serif;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .message {
-            background-color: #ffffff;
-            padding: 30px 40px;
-            border-radius: 8px;
-            box-shadow: 0
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fllower for my fllower</title>
+
+<style>
+:root{
+  --deep:#4a000b;
+  --mid:#8f0016;
+  --light:#ff4a6d;
+  --glow:#ff6b81;
+  --leaf1:#174d22;
+  --leaf2:#6fbf73;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top, #220006 0%, #0a0002 55%),
+    linear-gradient(#0f0003,#000);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:"Segoe UI", Tahoma, sans-serif;
+  color:#fff;
+  overflow:hidden;
+  perspective:1800px;
+}
+
+/* الرسالة */
+.message{
+  text-align:center;
+  font-size:clamp(20px,4.6vw,34px);
+  line-height:1.9;
+  min-height:4.8em;
+  margin-bottom:26px;
+  text-shadow:0 0 22px var(--glow);
+  letter-spacing:.04em;
+}
+
+/* المشهد */
+.scene{
+  width:min(360px,92vw);
+  height:min(560px,96vw);
+  display:flex;
+  justify-content:center;
+}
+
+/* الوردة */
+.rose{
+  position:relative;
+  width:300px;
+  height:300px;
+  transform-style:preserve-3d;
+  filter:
+    drop-shadow(0 28px 50px rgba(255,80,120,.25))
+    drop-shadow(0 0 45px rgba(255,90,120,.35));
+}
+
+/* طبقات */
+.layer{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+}
+
+/* بتلة */
+.petal{
+  position:absolute;
+  background:
+    radial-gradient(140% 90% at 50% 12%, rgba(255,255,255,.25), transparent 45%),
+    linear-gradient(to top, var(--deep), var(--mid) 55%, var(--light));
+  transform-origin:bottom center;
+  border-radius:65% 65% 50% 50%;
+  box-shadow:
+    inset 0 -22px 34px rgba(0,0,0,.45),
+    inset 0 6px 14px rgba(255,255,255,.18);
+  animation:bloom 4s cubic-bezier(.17,.7,.25,1) forwards;
+}
+
+/* خارجية */
+.outer .petal{
+  width:100px;height:180px;
+  left:100px;top:40px;
+}
+.outer .petal:nth-child(1){--ry:0deg;animation-delay:0s}
+.outer .petal:nth-child(2){--ry:55deg;animation-delay:.3s}
+.outer .petal:nth-child(3){--ry:120deg;animation-delay:.6s}
+.outer .petal:nth-child(4){--ry:185deg;animation-delay:.9s}
+.outer .petal:nth-child(5){--ry:245deg;animation-delay:1.2s}
+.outer .petal:nth-child(6){--ry:305deg;animation-delay:1.5s}
+
+/* وسطى */
+.middle .petal{
+  width:85px;height:150px;
+  left:108px;top:60px;
+  background:
+    radial-gradient(140% 90% at 50% 12%, rgba(255,255,255,.2), transparent 45%),
+    linear-gradient(to top,#5f000e,#a00018 55%,#ff5c78);
+}
+.middle .petal:nth-child(1){--ry:30deg;animation-delay:1.8s}
+.middle .petal:nth-child(2){--ry:90deg;animation-delay:2s}
+.middle .petal:nth-child(3){--ry:150deg;animation-delay:2.2s}
+.middle .petal:nth-child(4){--ry:210deg;animation-delay:2.4s}
+.middle .petal:nth-child(5){--ry:270deg;animation-delay:2.6s}
+.middle .petal:nth-child(6){--ry:330deg;animation-delay:2.8s}
+
+/* داخلية دقيقة (قلب واقعي من بتلات فقط) */
+.inner .petal{
+  width:55px;height:95px;
+  left:122px;top:95px;
+  background:
+    radial-gradient(140% 90% at 50% 15%, rgba(255,255,255,.15), transparent 45%),
+    linear-gradient(to top,#420009,#7a0012 60%,#e84563);
+  border-radius:70% 70% 55% 55%;
+}
+.inner .petal:nth-child(1){--ry:20deg;animation-delay:3s}
+.inner .petal:nth-child(2){--ry:80deg;animation-delay:3.15s}
+.inner .petal:nth-child(3){--ry:140deg;animation-delay:3.3s}
+.inner .petal:nth-child(4){--ry:200deg;animation-delay:3.45s}
+.inner .petal:nth-child(5){--ry:260deg;animation-delay:3.6s}
+.inner .petal:nth-child(6){--ry:320deg;animation-delay:3.75s}
+
+/* الساق */
+.stem{
+  position:absolute;
+  width:12px;
+  height:240px;
+  left:144px;
+  top:300px;
+  background:linear-gradient(var(--leaf1),var(--leaf2));
+  border-radius:6px;
+}
+
+/* الأوراق */
+.leaf{
+  position:absolute;
+  width:130px;height:60px;
+  top:360px;
+  background:linear-gradient(135deg,#2e7d32,#9ad29f);
+  border-radius:75px 75px 75px 0;
+  box-shadow:inset 0 -8px 14px rgba(0,0,0,.35);
+}
+.leaf.left{left:0;transform:rotate(-30deg)}
+.leaf.right{right:0;transform:scaleX(-1) rotate(-30deg)}
+
+/* الحركة */
+@keyframes bloom{
+  from{transform:rotateY(var(--ry)) rotateX(80deg) translateZ(0)}
+  to{transform:rotateY(var(--ry)) rotateX(0deg) translateZ(120px)}
+}
+
+/* موبايل */
+@media (max-width:480px){
+  .rose{transform:scale(.9)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="message" id="type"></div>
+
+<div class="scene">
+  <div class="rose">
+    <div class="layer outer">
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    </div>
+    <div class="layer middle">
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    </div>
+    <div class="layer inner">
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    </div>
+
+    <div class="stem"></div>
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
+  </div>
+</div>
+
+<script>
+// كتابة الرسالة حرفًا حرفًا
+const lines = [
+  "أنتِ بالنسبة لي أغلى بكثير مما تتصورين",
+  "أنتِ القلب والروح *** أنتِ الحب والأمل"
+];
+const el = document.getElementById("type");
+let l=0,c=0;
+function type(){
+  if(l<lines.length){
+    if(c<=lines[l].length){
+      el.innerHTML = lines.slice(0,l).join("<br>") + (l?"<br>":"") + lines[l].slice(0,c++);
+      setTimeout(type,70);
+    }else{
+      l++; c=0;
+      setTimeout(type,500);
+    }
+  }
+}
+setTimeout(type,2600);
+</script>
+
+</body>
+</html>
